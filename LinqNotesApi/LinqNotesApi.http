@@ -1,0 +1,6 @@
+@LinqNotesApi_HostAddress = http://localhost:5103
+
+GET {{LinqNotesApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
