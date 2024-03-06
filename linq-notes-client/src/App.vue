@@ -1,27 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div id="app">
+    <AddNote @note-added="triggerRefresh" />
+    <ListNotes :key="refreshKey" />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import { defineComponent, ref } from "vue";
+import AddNote from "./components/note/AddNote.vue";
+import ListNotes from "./components/note/ListNotes.vue";
 
 export default defineComponent({
-  name: "App",
   components: {
-    HelloWorld,
+    AddNote,
+    ListNotes,
+  },
+  setup() {
+    const refreshKey = ref(0);
+
+    const triggerRefresh = () => {
+      refreshKey.value++;
+    };
+
+    return {
+      refreshKey,
+      triggerRefresh,
+    };
   },
 });
 </script>
 
-<style>
+<style scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  #app {
+    padding: 15px;
+  }
 }
 </style>
